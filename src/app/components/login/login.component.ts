@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ServiceService} from "./service/service.service";
 import {environment} from "../../../environments/environment";
+import {Router} from "@angular/router";
 
 
 
@@ -41,7 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(public configService: ConfigService ,private fb:FormBuilder,
-              private service:ServiceService){ }
+              private service:ServiceService,
+              private router:Router){ }
 
     Loggin:FormGroup = this.fb.group({
         usuario:['',[Validators.required]],
@@ -65,12 +67,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
      async enviar() {
 
-         console.log(this.Loggin.value);
+
          const usuario:string= this.Loggin.controls['usuario'].value
          const password:string= this.Loggin.controls['password'].value
-         console.log(usuario+'  '+password);
+
          await this.service.Loggin(usuario,password).toPromise().then(resp => {
              console.log(resp);
+             sessionStorage.setItem('token',resp.access_token);
+             sessionStorage.setItem('nombre',resp.nombre);
+             this.router.navigate(['/admin/uikit/dashboard']);
          },err => {
              console.log(err);
          })

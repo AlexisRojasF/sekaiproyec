@@ -32,9 +32,9 @@ import { AccessComponent } from './components/access/access.component';
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: AppMainComponent,
+                path: 'admin', component: AppMainComponent,
                 children: [
-                    {path: '', component: DashboardComponent},
+                    {path: 'uikit/dashboard', component: DashboardComponent},
                     {path: 'uikit/formlayout', component: FormLayoutComponent},
                     {path: 'uikit/input', component: InputComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelComponent},
@@ -60,11 +60,11 @@ import { AccessComponent } from './components/access/access.component';
                 ],
             },
             {path:'pages/landing', component: LandingComponent},
-            {path:'pages/login', component: LoginComponent},
+            {path:'login', component: LoginComponent},
             {path:'pages/error', component: ErrorComponent},
             {path:'pages/notfound', component: NotfoundComponent},
             {path:'pages/access', component: AccessComponent},
-            {path: '**', redirectTo: 'pages/notfound'},
+            { path: "", redirectTo: "login", pathMatch: "full" },
         ], {scrollPositionRestoration: 'enabled', anchorScrolling:'enabled'})
     ],
     exports: [RouterModule]
