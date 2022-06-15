@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-    apiUrl:'http://localhost:8080/',
+    apiUrl:'http://192.168.10.244:8080/ManagerWeb/',
     user:'frontApp',
     pass:'05740574'
 };
