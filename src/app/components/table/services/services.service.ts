@@ -4,6 +4,7 @@ import {environment} from "../../../../environments/environment";
 import {Observable} from "rxjs";
 import {ModelLoggin} from "../../login/interfaces/ModelLoggin";
 import {Catalogos, Usuario} from "../interfaces/Usuario";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,13 @@ export class ServicesService {
         const url: string = `${this.url}CatalogosVenta/all`;
 
         return this.http.get<Catalogos[]>(url,{ 'headers': this.headers });
+    }
+
+    CreateUsuario(user:FormGroup):Observable<Usuario>{
+        this.headers =this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
+        const url: string = `${this.url}users/create`;
+
+        return this.http.post<Usuario>(url,user,{ 'headers': this.headers });
     }
 
 

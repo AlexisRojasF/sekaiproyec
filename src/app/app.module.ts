@@ -140,6 +140,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
+import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
 
 @NgModule({
     imports: [
@@ -149,6 +150,8 @@ import { AccessComponent } from './components/access/access.component';
         BrowserModule,
         FormsModule,
         AppRoutingModule,
+        CheckboxModule,
+        MultiSelectModule,
 
         BrowserAnimationsModule,
         AccordionModule,
@@ -163,7 +166,7 @@ import { AccessComponent } from './components/access/access.component';
         CarouselModule,
         CascadeSelectModule,
         ChartModule,
-        CheckboxModule,
+
         ChipsModule,
         ChipModule,
         CodeHighlighterModule,
@@ -184,6 +187,7 @@ import { AccessComponent } from './components/access/access.component';
         InputMaskModule,
         InputSwitchModule,
         InputTextModule,
+        TriStateCheckboxModule,
         InputTextareaModule,
         KnobModule,
         LightboxModule,
@@ -193,7 +197,7 @@ import { AccessComponent } from './components/access/access.component';
         MenubarModule,
         MessageModule,
         MessagesModule,
-        MultiSelectModule,
+
         OrderListModule,
         OrganizationChartModule,
         OverlayPanelModule,
