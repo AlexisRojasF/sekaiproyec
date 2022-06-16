@@ -141,6 +141,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+import { VentasDescComponent } from './components/ventas-desc/ventas-desc.component';
 
 @NgModule({
     imports: [
@@ -278,6 +279,7 @@ import { VentasComponent } from './components/ventas/ventas.component';
         NotfoundComponent,
         AccessComponent,
         VentasComponent,
+        VentasDescComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

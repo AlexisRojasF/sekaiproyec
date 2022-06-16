@@ -29,6 +29,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+import { VentasDescComponent } from './components/ventas-desc/ventas-desc.component';
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -63,6 +64,7 @@ import { VentasComponent } from './components/ventas/ventas.component';
             {path:'pages/landing', component: LandingComponent},
             {path:'login', component: LoginComponent},
             {path: 'ay', component: VentasComponent},
+            {path:'desc',component:VentasDescComponent},
             {path:'pages/error', component: ErrorComponent},
             {path:'pages/notfound', component: NotfoundComponent},
             {path:'pages/access', component: AccessComponent},
