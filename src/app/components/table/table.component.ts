@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { Customer, Representative } from '../../api/customer';
 import { CustomerService } from '../../service/customerservice';
-import { Product } from '../../api/product';
-import { ProductService } from '../../service/productservice';
 import { Table } from 'primeng/table';
 import { MessageService, ConfirmationService } from 'primeng/api'
 import {ServicesService} from "./services/services.service";
-import {tipoVendedor, Usuario} from "./interfaces/Usuario";
+import {Catalogos, tipoVendedor, Usuario} from "./interfaces/Usuario";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     templateUrl: './table.component.html',
@@ -32,7 +31,7 @@ export class TableComponent implements OnInit {
     representatives: Representative[];
 
     rowGroupMetadata: any;
-
+    city:any;
 
     activityValues: number[] = [0, 100];
 
@@ -50,21 +49,69 @@ export class TableComponent implements OnInit {
 
    usuarios:Usuario[]= [];
 
+   catalogos:Catalogos[]= [];
+
+   selectCatalogos:string[];
+
    tipoVendedores:tipoVendedor[];
    tipoVendedor:tipoVendedor;
+
+   TipoDocumentos:String[]=[];
 
     @ViewChild('dt') table: Table;
 
     @ViewChild('filter') filter: ElementRef;
 
-    constructor(private service:ServicesService,
+    constructor(private service:ServicesService,private fb:FormBuilder,
         private customerService: CustomerService) {
+
+
+        this.service.Catalogos().subscribe(resp=> {
+            this.catalogos = resp;
+        },err=>{
+            console.log(err);
+        });
 
         this.tipoVendedores=[
             {name:'Vendedor',code:'VENDEDOR'},
             {name:'Adminitrador',code:'ADM'},
             {name:'Consultor',code:'CONSULTOR'},
         ];
+
+
+    }
+
+    Form:FormGroup = this.fb.group({
+        usucodigo:['',[Validators.required]],
+        usunombre:['',[Validators.required]],
+        usucontra:['',[Validators.required]],
+        usuvende:['',[Validators.required]],
+        usudocumen:['',[Validators.required]],
+        usutipo:['',[Validators.required]],
+        usucatvent:['',[Validators.required]],
+        usuvolumen:['',[Validators.required]],
+        usuimprime:[0,[Validators.required]],
+        usuactivo:[0,[Validators.required]],
+        usubloqcat:[0,[Validators.required]],
+        usucaraut:[0,[Validators.required]],
+        usuagenda:[0,[Validators.required]],
+
+    });
+
+
+    enviar(){
+        this.Form.controls['usucatvent'].setValue(this.Form.controls['usucatvent'].value.join("+"));
+        this.Form.controls['usuimprime'].setValue(parseInt(this.Form.controls['usuimprime'].value.toString(),10));
+        this.Form.controls['usuactivo'].setValue(parseInt(this.Form.controls['usuactivo'].value.toString(),10));
+        this.Form.controls['usubloqcat'].setValue(parseInt(this.Form.controls['usubloqcat'].value.toString(),10));
+        this.Form.controls['usucaraut'].setValue(parseInt(this.Form.controls['usucaraut'].value.toString(),10));
+        console.log(this.Form.value);
+
+        this.service.CreateUsuario(this.Form.value).subscribe(resp=>{
+            console.log(resp);
+        },err=>{
+            console.log(err);
+        });
     }
 
     ngOnInit() {
@@ -73,9 +120,17 @@ export class TableComponent implements OnInit {
             console.log(resp)
             this.usuarios = resp;
             this.loading = false;
+
+            this.usuarios.map(res => {
+                this.TipoDocumentos.push(res.usudocumen);
+            })
+
+            this.TipoDocumentos= [...new Set(this.TipoDocumentos)];
+
         },error => {
             console.log(error)
         })
+
 
 
 

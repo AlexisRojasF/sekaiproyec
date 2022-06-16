@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   password: string;
 
+
   config: AppConfig;
 
   subscription: Subscription;

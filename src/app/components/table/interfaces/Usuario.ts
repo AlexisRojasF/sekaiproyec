@@ -24,7 +24,7 @@ export interface Catalogos {
     catmaxdias: number;
 }
 
-export  interface  tipoVendedor{
+export  interface tipoVendedor{
     name:string,
     code:string
 }
