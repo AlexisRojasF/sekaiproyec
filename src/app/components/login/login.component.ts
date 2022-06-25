@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
              console.log(resp);
              sessionStorage.setItem('token',resp.access_token);
              sessionStorage.setItem('nombre',resp.nombre);
-             this.router.navigate(['/admin/uikit/dashboard']);
+             this.router.navigate(['/admin/uikit/dashboard']);// '/admin/uikit/dashboar'
          },err => {
              console.log(err);
          })

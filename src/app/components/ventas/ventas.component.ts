@@ -1,15 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Customer } from '../../api/customer';
+import { VentasService } from '../../service/ventas.service';
+import { Ventas } from '../../api/ventas';
+import { Vendedor } from '../../api/vendedor';
 
 @Component({
   selector: 'app-ventas',
   templateUrl: './ventas.component.html',
 })
 export class VentasComponent implements OnInit {
-    customers1: Customer[];
+
     rutas: MenuItem[];
-  constructor() { }
+    ventas: Ventas[]=[];
+    vendedores: Vendedor[]=[];
+    vendedorSeleccionado: Vendedor;
+
+    servicio: VentasService;
+    fechaIncial:Date=new Date();
+    fechaFinal:Date=new Date();
+    limitarBusqueda:Boolean=true;
+
+  constructor(servicioVentas:VentasService ) {
+    this.servicio= servicioVentas;
+    this.servicio.getListaVendedores().subscribe(resp=>{
+         this.vendedores=resp;
+         console.log("si pase");
+    });
+    console.log("en construccion:"+this.vendedores.length);
+    if(this.vendedores.length>0){
+        this.vendedorSeleccionado=this.vendedores[0];
+    }
+
+  }
 
   ngOnInit(): void {
     this.rutas = [
@@ -19,5 +41,13 @@ export class VentasComponent implements OnInit {
       ];
   }
 
-  boton():void{}
+  async boton():Promise<void>{
+
+  }
+
+  async buscar():Promise<void>{
+    this.servicio.GetVentasPorFecha(this.fechaIncial.toISOString().split('T')[0],this.fechaFinal.toISOString().split('T')[0]).subscribe(resp=> {
+        this.ventas = resp;
+    });
+  }
 }

@@ -177,4 +177,15 @@ export class TableComponent implements OnInit {
         table.clear();
         this.filter.nativeElement.value = '';
     }
+
+    openEdit() {
+        // @ts-ignore
+        //this.selectUsuario = {};
+        this.submitted = false;
+        this.usuarioDialog = true;
+    }
+
+    userDelete(){
+
+    }
 }
