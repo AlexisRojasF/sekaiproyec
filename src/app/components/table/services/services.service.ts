@@ -21,6 +21,7 @@ export class ServicesService {
     Usuarios():Observable<Usuario[]> {
 
       this.headers =this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
+
         const url: string = `${this.url}users/usuario`;
 
         return this.http.get<Usuario[]>(url,{ 'headers': this.headers });
@@ -39,6 +40,19 @@ export class ServicesService {
         const url: string = `${this.url}users/create`;
 
         return this.http.post<Usuario>(url,user,{ 'headers': this.headers });
+    }
+
+    DeleteUsuario(id:any):void{
+        this.headers =this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
+        ///this.headers = this.headers.append( 'Content-Type', 'text/plain');
+        const url: string = `${this.url}users/delete`;
+        this.http.delete(url,{ 'headers': this.headers,'body':{id:id},'responseType':'text' }).subscribe({
+            next(){
+                console.log("pase");
+            }
+        });
+        console.log("eliminado");
+        
     }
 
 

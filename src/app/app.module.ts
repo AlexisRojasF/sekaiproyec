@@ -143,6 +143,9 @@ import { AccessComponent } from './components/access/access.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { VentasDescComponent } from './components/ventas-desc/ventas-desc.component';
 import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
+import { ProductosComponent } from './components/productos/productos.component';
+import { ProductosDescComponent } from './components/productos-desc/productos-desc.component';
+import { CatalogosVentasComponent } from './components/catalogos-ventas/catalogos-ventas.component';
 
 @NgModule({
     imports: [
@@ -284,6 +287,9 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
         AccessComponent,
         VentasComponent,
         VentasDescComponent,
+        ProductosComponent,
+        ProductosDescComponent,
+        CatalogosVentasComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

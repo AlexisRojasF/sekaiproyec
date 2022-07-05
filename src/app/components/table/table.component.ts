@@ -48,7 +48,7 @@ export class TableComponent implements OnInit {
     usuarioDialog: boolean;
 
    usuarios:Usuario[]= [];
-
+   usuarioSeleccionado:Usuario;
    catalogos:Catalogos[]= [];
 
    selectCatalogos:string[];
@@ -112,29 +112,11 @@ export class TableComponent implements OnInit {
         },err=>{
             console.log(err);
         });
+        window.location.reload();
     }
 
     ngOnInit() {
-
-        this.service.Usuarios().subscribe(resp => {
-            console.log(resp)
-            this.usuarios = resp;
-            this.loading = false;
-
-            this.usuarios.map(res => {
-                this.TipoDocumentos.push(res.usudocumen);
-            })
-
-            this.TipoDocumentos= [...new Set(this.TipoDocumentos)];
-
-        },error => {
-            console.log(error)
-        })
-
-
-
-
-
+        this.fillUserList();
     }
 
     onSort() {
@@ -180,12 +162,36 @@ export class TableComponent implements OnInit {
 
     openEdit() {
         // @ts-ignore
-        //this.selectUsuario = {};
+        //this.selectUsuario = usuarioSeleccionado;
         this.submitted = false;
         this.usuarioDialog = true;
     }
 
     userDelete(){
+        console.log(this.usuarios.indexOf(this.usuarioSeleccionado));
+        this.service.DeleteUsuario(this.usuarioSeleccionado.usucodigo);
+        window.location.reload();
+    }
 
+    userSelect(usuario:any){
+        this.usuarioSeleccionado=usuario;
+        console.log(this.usuarioSeleccionado);
+    }
+
+    fillUserList(){
+        this.service.Usuarios().subscribe(resp => {
+            console.log(resp)
+            this.usuarios = resp;
+            this.loading = false;
+
+            this.usuarios.map(res => {
+                this.TipoDocumentos.push(res.usudocumen);
+            })
+
+            this.TipoDocumentos= [...new Set(this.TipoDocumentos)];
+
+        },error => {
+            console.log(error)
+        })
     }
 }

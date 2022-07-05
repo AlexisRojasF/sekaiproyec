@@ -30,6 +30,9 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { VentasDescComponent } from './components/ventas-desc/ventas-desc.component';
+import { ProductosComponent } from './components/productos/productos.component';
+import { ProductosDescComponent } from './components/productos-desc/productos-desc.component';
+import { CatalogosVentasComponent } from './components/catalogos-ventas/catalogos-ventas.component';
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -60,7 +63,10 @@ import { VentasDescComponent } from './components/ventas-desc/ventas-desc.compon
                     {path: 'blocks', component: BlocksComponent},
                     {path: 'documentation', component: DocumentationComponent},
                     {path:'ventas', component: VentasComponent},
-                    {path:'ventas/desc',component:VentasDescComponent}, 
+                    {path:'ventas/desc',component:VentasDescComponent},
+                    {path:'productos', component: ProductosComponent},
+                    {path:'productos/des', component: ProductosDescComponent},
+                    {path:'catalogos', component: CatalogosVentasComponent}
                 ],
             },
             {path:'pages/landing', component: LandingComponent},

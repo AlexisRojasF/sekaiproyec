@@ -63,7 +63,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-usuario>
-                    <tr [pSelectableRow]="usuario">
+                    <tr [pSelectableRow]="usuario" (click)="userSelect(usuario)">
                         <td style="min-width: 12rem;">
                             {{usuario.usucodigo}}
                         </td>
