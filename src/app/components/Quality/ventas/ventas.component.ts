@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { VentasService } from '../../service/ventas.service';
-import { Ventas } from '../../api/ventas';
-import { Vendedor } from '../../api/vendedor';
+import { VentasService } from '../../../service/ventas.service';
+import { Ventas } from '../../../api/ventas';
+import { Vendedor } from '../../../api/vendedor';
 
 @Component({
   selector: 'app-ventas',
@@ -14,6 +14,7 @@ export class VentasComponent implements OnInit {
     ventas: Ventas[]=[];
     vendedores: Vendedor[]=[];
     vendedorSeleccionado: Vendedor;
+    ventaSeleccionada: Ventas;
 
     servicio: VentasService;
     fechaIncial:Date=new Date();
@@ -35,7 +36,7 @@ export class VentasComponent implements OnInit {
 
   ngOnInit(): void {
     this.rutas = [
-        { icon: "pi pi-home" },
+        { icon: "pi pi-home",routerLink: ['/admin/uikit/dashboard'] },
         { label: "Documentos" },
         { label: "Ventas" },
       ];

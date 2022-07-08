@@ -1,0 +1,81 @@
+<app-breadcrumb [rutas]="rutas"></app-breadcrumb>
+<p-table #dt1 [value]="products" dataKey="usucodigo" [rows]="10"
+selectionMode="single" [(selection)]="selectedProduct" [rowHover]="true"
+styleClass="p-datatable-gridlines" [paginator]="true"
+[globalFilterFields]="['productoPk.procodigo','pronombre']" responsiveLayout="scroll">
+<ng-template pTemplate="caption">
+<div class="flex justify-content-between flex-column sm:flex-row">
+   <button pButton label="Detalle" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
+           (click)="detalleProducto()"></button>
+   <span class="p-input-icon-left mb-2">
+       <i class="pi pi-search"></i>
+       <input pInputText type="text" #filter
+              (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar.."
+              class="w-full"/>
+   </span>
+</div>
+</ng-template>
+<ng-template pTemplate="header">
+<tr>
+   <th>
+       <div class="flex justify-content-between align-items-center">
+           Codigo
+       </div>
+   </th>
+   <th>
+       <div class="flex justify-content-between align-items-center">
+            Nombre
+       </div>
+   </th>
+   <th>
+       <div class="flex justify-content-between align-items-center">
+           IVA
+
+       </div>
+   </th>
+
+   <th>
+       <div class="flex justify-content-between align-items-center">
+           UNIDAD BASE
+       </div>
+   </th>
+
+   <th style="width: 8rem">
+       <div class="flex justify-content-between align-items-center">
+           EXISTENCIA
+       </div>
+   </th>
+</tr>
+</ng-template>
+<ng-template pTemplate="body" let-producto>
+<tr [pSelectableRow]="producto" (click)="userSelect(producto)">
+   <td style="min-width: 12rem;">
+       {{producto.productoPk.procodigo}}
+   </td>
+   <td style="min-width: 12rem;">
+       <span class="image-text ml-2">{{producto.pronombre}}</span>
+   </td>
+   <td style="min-width: 14rem;">
+       <span class="image-text ml-2">{{producto.proiva}}</span>
+   </td>
+
+   <td style="min-width: 10rem;">
+       <span class="image-text ml-2">{{producto.prounidad}}</span>
+   </td>
+
+   <td style="min-width: 10rem;">
+    <span class="image-text ml-2">{{producto.procantidad}}</span>
+</td>
+</tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+<tr>
+   <td colspan="7">No a sido posible cargar la table.</td>
+</tr>
+</ng-template>
+<ng-template pTemplate="loadingbody">
+<tr>
+   <td colspan="7">Cargando Datos, Espere un momento.</td>
+</tr>
+</ng-template>
+</p-table>

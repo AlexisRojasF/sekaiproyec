@@ -140,12 +140,13 @@ import { LoginComponent } from './components/login/login.component';
 import { ErrorComponent } from './components/error/error.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AccessComponent } from './components/access/access.component';
-import { VentasComponent } from './components/ventas/ventas.component';
-import { VentasDescComponent } from './components/ventas-desc/ventas-desc.component';
+import { VentasComponent } from './components/Quality/ventas/ventas.component';
+import { VentasDescComponent } from './components/Quality/ventas-desc/ventas-desc.component';
 import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
-import { ProductosComponent } from './components/productos/productos.component';
-import { ProductosDescComponent } from './components/productos-desc/productos-desc.component';
-import { CatalogosVentasComponent } from './components/catalogos-ventas/catalogos-ventas.component';
+import { ProductosComponent } from './components/Quality/productos/productos.component';
+import { ProductosDescComponent } from './components/Quality/productos-desc/productos-desc.component';
+import { CatalogosVentasComponent } from './components/Quality/catalogos-ventas/catalogos-ventas.component';
+import { BreadcrumbComponent } from './components/Quality/breadcrumb/breadcrumb.component';
 
 @NgModule({
     imports: [
@@ -290,6 +291,7 @@ import { CatalogosVentasComponent } from './components/catalogos-ventas/catalogo
         ProductosComponent,
         ProductosDescComponent,
         CatalogosVentasComponent,
+        BreadcrumbComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
