@@ -147,6 +147,9 @@ import { ProductosComponent } from './components/Quality/productos/productos.com
 import { ProductosDescComponent } from './components/Quality/productos-desc/productos-desc.component';
 import { CatalogosVentasComponent } from './components/Quality/catalogos-ventas/catalogos-ventas.component';
 import { BreadcrumbComponent } from './components/Quality/breadcrumb/breadcrumb.component';
+import { ComboComponent } from './components/Quality/combo/combo.component';
+import { TipodocComponent } from './components/Quality/tipodoc/tipodoc.component';
+import { TipoeventoComponent } from './components/Quality/tipoevento/tipoevento.component';
 
 @NgModule({
     imports: [
@@ -292,6 +295,9 @@ import { BreadcrumbComponent } from './components/Quality/breadcrumb/breadcrumb.
         ProductosDescComponent,
         CatalogosVentasComponent,
         BreadcrumbComponent,
+        ComboComponent,
+        TipodocComponent,
+        TipoeventoComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

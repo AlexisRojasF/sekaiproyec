@@ -10,7 +10,7 @@
                 </th>
                 <th>
                     <div class="flex justify-content-between align-items-center">
-                        {{subTotal}}
+                        {{producto.productoPk.procodigo}}
                     </div>
                 </th>
 
@@ -23,7 +23,7 @@
                     Nombre:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.pronombre}}
                 </td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
                     Cantidad:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.procantidad}}
                 </td>
             </tr>
             <tr>
@@ -39,7 +39,7 @@
                     Bodega:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.productoPk.probodega}}
                 </td>
             </tr>
             <tr>
@@ -47,7 +47,7 @@
                     IVA:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.proiva}}
                 </td>
             </tr>
             <tr>
@@ -55,7 +55,7 @@
                     % IVA:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.proporiva}}
                 </td>
             </tr>
             <tr>
@@ -63,7 +63,7 @@
                     Estampillas:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.proestampi}}
                 </td>
             </tr>
             <tr>
@@ -71,7 +71,7 @@
                     Unidad Base:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.prounidad}}
                 </td>
             </tr>
             <tr>
@@ -79,7 +79,7 @@
                     Activo:
                 </td>
                 <td style="min-width: 12rem;">
-                    {{subTotal}}
+                    {{producto.proactivo}}
                 </td>
             </tr>
         </ng-template>

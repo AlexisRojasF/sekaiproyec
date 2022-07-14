@@ -1,0 +1,128 @@
+<app-breadcrumb [rutas]="rutas"></app-breadcrumb>
+
+<p-table #dt1 [value]="tipoEventoList" dataKey="tpecodigo" [rows]="10"
+selectionMode="single" [(selection)]="tipoEventoSeleccionado" [rowHover]="true"
+styleClass="p-datatable-gridlines" [paginator]="true"
+[globalFilterFields]="['tpecodigo','tpenombre']" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+        <div class="flex  flex-column sm:flex-row">
+
+            <button pButton label="Agregar" class="p-button-outlined mb-3" icon="pi pi-filter-slash"
+                    (click)="agregar()"></button>
+            <button pButton label="Editar" class="p-button-outlined mb-3" ng-disabled="seleccionado()" icon="pi pi-filter-slash"
+                    (click)="editar()"></button>
+            <button pButton label="Eliminar" class="p-button-outlined mb-3" icon="pi pi-filter-slash"
+                    (click)="eliminar()"></button>
+            <button pButton label="Detalle" class="p-button-outlined mb-3" icon="pi pi-filter-slash"
+                    (click)="consultaDetalles()"></button>
+
+            <span class="p-input-icon-left mb-2">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" #filter
+                        (input)="dt1.filterGlobal($event.target.value, '    contains')" placeholder="Buscar.."
+                        class="w-full"/>
+            </span>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Codigo
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                        Nombre
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-tipoEvento>
+        <tr [pSelectableRow]="tipoEvento" (click)="select(tipoEvento)">
+            <td style="min-width: 12rem;">
+                {{tipoEvento.tpecodigo}}
+            </td>
+            <td style="min-width: 12rem;">
+                <span class="image-text ml-2">{{tipoEvento.tpenombre}}</span>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">No a sido posible cargar la table.</td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="loadingbody">
+        <tr>
+            <td colspan="7">Cargando Datos, Espere un momento.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="desplegarModal" [style]="{width: '400px',height:'345px'}" header="Tipo Evento" [modal]="true" styleClass="p-fluid">
+
+    <form [formGroup]="Form" (ngSubmit)="enviar()">
+
+        <div class="card">
+            <div class="formgrid grid">
+                <div class="field col-12 " >
+                    <div class="p-inputgroup mb-3">
+                        <span class="p-inputgroup-addon">
+                            <i class="pi pi-user"></i>
+                        </span>
+                        <span class="p-float-label">
+                            <input type="text" id="codigo" pInputText formControlName="tpecodigo">
+                            <label for="codigo">Codigo</label>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field col-12 md:col-12 ">
+                    <div class="p-inputgroup mb-3">
+                        <span class="p-inputgroup-addon">
+                            <i class="pi pi-id-card"></i>
+                        </span>
+                        <span class="p-float-label">
+                            <input type="text" id="nombre" pInputText formControlName="tpenombre">
+                            <label for="nombre">Nombre</label>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="col-12 md:col-6 mt-3">
+                    <button pButton pRipple label="Save" type="submit" icon="pi pi-check" class="p-button-outlined p-button-secondary"></button>
+                </div>
+
+                <div class="col-12 md:col-6 mt-3 ">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-outlined p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+
+
+<p-dialog [(visible)]="eliminarModal" [style]="{width: '400px',height:'230px'}" header="Eliminar tipo evento?" [modal]="true" styleClass="p-fluid">
+
+    <form [formGroup]="Form" (ngSubmit)="eliminacionTPE()">
+
+        <div class="card">
+            <div class="formgrid grid">
+                <div class="col-12 md:col-6 mt-3">
+                    <button pButton pRipple label="Save" type="submit" icon="pi pi-check" class="p-button-outlined p-button-secondary"></button>
+                </div>
+
+                <div class="col-12 md:col-6 mt-3 ">
+                    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-outlined p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</p-dialog>

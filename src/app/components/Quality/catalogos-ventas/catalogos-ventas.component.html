@@ -1,72 +1,75 @@
 <app-breadcrumb [rutas]="rutas"></app-breadcrumb>
 
-<p-table #dt1 [value]="catalogos" dataKey="usucodigo" [rows]="10"
+<p-table #dt1 [value]="catalogos" dataKey="catcodigo" [rows]="10"
 selectionMode="single" [(selection)]="catalogoSeleccionado" [rowHover]="true"
 styleClass="p-datatable-gridlines" [paginator]="true"
 [globalFilterFields]="['catcodigo','catnombre']" responsiveLayout="scroll">
-<ng-template pTemplate="caption">
-<div class="flex justify-content-between flex-column sm:flex-row">
-   <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
-           (click)="clear(dt1)"></button>
-   <span class="p-input-icon-left mb-2">
-       <i class="pi pi-search"></i>
-       <input pInputText type="text" #filter
-              (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar.."
-              class="w-full"/>
-   </span>
-</div>
-</ng-template>
-<ng-template pTemplate="header">
-<tr>
-   <th>
-       <div class="flex justify-content-between align-items-center">
-           Codigo
-       </div>
-   </th>
-   <th>
-       <div class="flex justify-content-between align-items-center">
-           nombre
-       </div>
-   </th>
-   <th>
-       <div class="flex justify-content-between align-items-center">
-          Min dias
 
-       </div>
-   </th>
+    <ng-template pTemplate="caption">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+            <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
+                (click)="clear(dt1)"></button>
+            <span class="p-input-icon-left mb-2">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" #filter
+                    (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar.."
+                    class="w-full"/>
+            </span>
+        </div>
+    </ng-template>
+    
+    <ng-template pTemplate="header">
+        <tr>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Codigo
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    nombre
+                </div>
+            </th>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Min dias
+                </div>
+            </th>
 
-   <th>
-       <div class="flex justify-content-between align-items-center">
-           Max Dias
-       </div>
-   </th>
-</tr>
-</ng-template>
-<ng-template pTemplate="body" let-catalogo>
-<tr [pSelectableRow]="catalogo" (click)="seleccionarCatalogo(catalogo)">
-   <td style="min-width: 12rem;">
-       {{catalogo.catcodigo}}
-   </td>
-   <td style="min-width: 12rem;">
-       <span class="image-text ml-2">{{catalogo.catnombre}}</span>
-   </td>
-   <td style="min-width: 14rem;">
-       <span class="image-text ml-2">{{catalogo.catmindias}}</span>
-   </td>
+            <th>
+                <div class="flex justify-content-between align-items-center">
+                    Max Dias
+                </div>
+            </th>
+        </tr>
+    </ng-template>
 
-   <td style="min-width: 10rem;">
-       <span class="image-text ml-2">{{catalogo.catmaxdias}}</span>
-   </td>
-</tr>
-</ng-template>
-<ng-template pTemplate="emptymessage">
-<tr>
-   <td colspan="7">No a sido posible cargar la table.</td>
-</tr>
-</ng-template>
-<ng-template pTemplate="loadingbody">
-<tr>
-   <td colspan="7">Cargando Datos, Espere un momento.</td>
-</tr>
-</ng-template>
+    <ng-template pTemplate="body" let-catalogo>
+        <tr [pSelectableRow]="catalogo" (click)="seleccionarCatalogo(catalogo)">
+            <td style="min-width: 12rem;">
+                {{catalogo.catcodigo}}
+            </td>
+            <td style="min-width: 12rem;">
+                {{catalogo.catnombre}}
+            </td>
+            <td style="min-width: 14rem;">
+                {{catalogo.catmindias}}
+            </td>
+
+            <td style="min-width: 10rem;">
+                {{catalogo.catmaxdias}}
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="7">No a sido posible cargar la table.</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody">
+        <tr>
+            <td colspan="7">Cargando Datos, Espere un momento.</td>
+        </tr>
+    </ng-template>
 </p-table>

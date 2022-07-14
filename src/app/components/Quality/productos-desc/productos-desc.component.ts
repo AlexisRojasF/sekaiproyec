@@ -8,11 +8,12 @@ import { Producto } from '../../../api/producto';
   styleUrls: ['./productos-desc.component.scss']
 })
 export class ProductosDescComponent implements OnInit {
-  @Input() producto:Producto;
+  producto:Producto;
   subTotal: number;
   rutas: MenuItem[];
   resumen: String[]=[];
   constructor() {
+   this.producto=JSON.parse(sessionStorage.getItem('producto'));
   }
 
   ngOnInit(): void {
@@ -24,7 +25,8 @@ export class ProductosDescComponent implements OnInit {
         { label: "Productos",routerLink:['/admin/productos'] },
         { label: "Detalles" },
     ];
-    console.log("info producto: "+this.producto);
+    console.log(this.producto);
   }
+
 
 }

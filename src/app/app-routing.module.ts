@@ -33,6 +33,9 @@ import { VentasDescComponent } from './components/Quality/ventas-desc/ventas-des
 import { ProductosComponent } from './components/Quality/productos/productos.component';
 import { ProductosDescComponent } from './components/Quality/productos-desc/productos-desc.component';
 import { CatalogosVentasComponent } from './components/Quality/catalogos-ventas/catalogos-ventas.component';
+import { ComboComponent } from './components/Quality/combo/combo.component';
+import { TipodocComponent } from './components/Quality/tipodoc/tipodoc.component';
+import { TipoeventoComponent } from './components/Quality/tipoevento/tipoevento.component';
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -66,7 +69,10 @@ import { CatalogosVentasComponent } from './components/Quality/catalogos-ventas/
                     {path:'ventas/desc',component:VentasDescComponent},
                     {path:'productos', component: ProductosComponent},
                     {path:'productos/desc', component: ProductosDescComponent},
-                    {path:'catalogos', component: CatalogosVentasComponent}
+                    {path:'catalogos', component: CatalogosVentasComponent},
+                    {path:'combos',component:ComboComponent},
+                    {path:'tipoDoc',component:TipodocComponent},
+                    {path:'tipoEve',component:TipoeventoComponent}
                 ],
             },
             {path:'pages/landing', component: LandingComponent},

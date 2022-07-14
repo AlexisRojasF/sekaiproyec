@@ -25,4 +25,9 @@ export class ProductosService {
         this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
         return this.http.get<Producto[]>(url,{'headers': this.headers });
     }
+    GetProductosCombo(id:any): Observable<Producto[]> {
+        const url: string = `${this.url}productos/combos`;
+        this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
+        return this.http.get<Producto[]>(url,{'headers': this.headers });
+    }
 }
