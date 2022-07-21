@@ -1,0 +1,24 @@
+<app-breadcrumb [rutas]="rutas"></app-breadcrumb>
+
+
+
+<p-card>
+    Busqueda
+    <hr>
+    Desde
+    <p-calendar [(ngModel)]="fechaIncial"></p-calendar>
+    &nbsp;
+    Hasta
+    <p-calendar [(ngModel)]="fechaFinal"></p-calendar>
+</p-card>
+
+&nbsp;
+
+<p-tabView>
+    <p-tabPanel header="Por Producto">
+       <app-pie-chart ></app-pie-chart>
+    </p-tabPanel>
+    <p-tabPanel header="Por Vendedor">
+        <!-- <app-pie-chart></app-pie-chart> -->
+    </p-tabPanel>
+</p-tabView>

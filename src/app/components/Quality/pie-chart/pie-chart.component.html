@@ -1,0 +1,13 @@
+<div class="grid p-fluid">
+    <div class="col-5 md:col-5">
+        <p-slider [(ngModel)]="values" [range]="true" [(min)]="piso" [(max)]="techo" (onChange)="filtrar()"></p-slider>
+    </div>
+
+    <div class="col-12 md:col-6">
+        <p-chart type="pie" [data]="data" [options]="chartOptions"></p-chart>
+    </div>
+</div>
+
+
+
+

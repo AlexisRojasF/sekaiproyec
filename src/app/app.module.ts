@@ -150,6 +150,8 @@ import { BreadcrumbComponent } from './components/Quality/breadcrumb/breadcrumb.
 import { ComboComponent } from './components/Quality/combo/combo.component';
 import { TipodocComponent } from './components/Quality/tipodoc/tipodoc.component';
 import { TipoeventoComponent } from './components/Quality/tipoevento/tipoevento.component';
+import { InformeVentasComponent } from './components/Quality/informe-ventas/informe-ventas.component';
+import { PieChartComponent } from './components/Quality/pie-chart/pie-chart.component';
 
 @NgModule({
     imports: [
@@ -297,7 +299,9 @@ import { TipoeventoComponent } from './components/Quality/tipoevento/tipoevento.
         BreadcrumbComponent,
         ComboComponent,
         TipodocComponent,
-        TipoeventoComponent
+        TipoeventoComponent,
+        InformeVentasComponent,
+        PieChartComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
