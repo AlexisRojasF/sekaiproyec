@@ -12,6 +12,7 @@ export class PieChartComponent implements OnInit {
     piso:number= 0;
     techo:number=200;
     data:any;
+    datos:any;
     chartOptions:any;
     informe:Informe[]=[];
     valores:number[]=[];
@@ -47,7 +48,7 @@ export class PieChartComponent implements OnInit {
         }
 
     }
-    console.log("piso: "+this.piso+"  techo: "+this.techo);
+    console.log("piso: "+this.piso+"  techo: "+this.techo+" valores: "+this.valores.length);
     //console.log(this.informe.length);
     //this.informe=this.informe.sort((a,b)=> a.parcial-b.parcial);
     // this.piso=this.informe[0].parcial;

@@ -17,7 +17,7 @@ export class VentasComponent implements OnInit {
     ventaSeleccionada: Ventas;
 
     servicio: VentasService;
-    fechaIncial:Date=new Date();
+    fechaIncial:Date=new Date("2011-06-08");
     fechaFinal:Date=new Date();
     limitarBusqueda:Boolean=true;
 
