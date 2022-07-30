@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InformeService } from 'src/app/service/informe.service';
 import { Informe } from '../../../api/informe';
+import { Seguimiento } from '../../../api/seguimiento';
 
 @Component({
   selector: 'app-pie-chart',
@@ -8,9 +9,10 @@ import { Informe } from '../../../api/informe';
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnInit {
+    @Input() selector:number;
     values: number[];
-    piso:number= 0;
-    techo:number=200;
+    piso:number= Number.POSITIVE_INFINITY;
+    techo:number=Number.NEGATIVE_INFINITY;
     data:any;
     datos:any;
     chartOptions:any;
@@ -25,52 +27,56 @@ export class PieChartComponent implements OnInit {
 
   constructor(informeVentas:InformeService ) {
     this.servicio= informeVentas;
-    this.servicio.GetSeguimientoPorVendedor(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
-         this.informe=resp;
-        //  console.log("si pase");
-        //  console.log(resp);
-    });
-    console.log(this.fechaIncial.toISOString().split("T")[0]);
-    console.log("inicia el ciclo condenado")
+    if(this.selector==1){
+        this.servicio.GetInfVentasByProducto(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
+             this.informe=resp;
+            for(let i =0;i<this.informe.length;i++){
+                this.valores.push(this.informe[i].parcial);
+                this.labels.push(this.informe[i].pronombre);
+                if(this.informe[i].parcial>this.techo){
+                    this.techo=this.informe[i].parcial;
+                }
+                if(this.informe[i].parcial<this.piso){
+                    this.piso=this.informe[i].parcial;
+                }
+            }
+            this.values=[this.piso,this.techo];
+            this.valores=this.valores.sort((a,b)=>a-b);
+        });
+    }else{
+        this.servicio.GetInfVentasByVendedor(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
+            //this.informe=resp;
+           //  console.log("si pase");
+           for(let i =0;i<this.informe.length;i++){
+               this.valores.push(this.informe[i].parcial);
+               this.labels.push(this.informe[i].pronombre);
+               if(this.informe[i].parcial>this.techo){
+                   this.techo=this.informe[i].parcial;
+               }
+               if(this.informe[i].parcial<this.piso){
+                   this.piso=this.informe[i].parcial;
+               }
+           }
+           this.values=[this.piso,this.techo];
+           this.valores=this.valores.sort((a,b)=>a-b);
+           //  console.log(resp);
+       });
+    }
 
   }
 
   ngOnInit(): void {
-    for(let i =0;i<this.informe.length;i++){
-        console.log(i)
-        this.valores.push(this.informe[i].parcial);
-        this.labels.push(this.informe[i].pronombre);
-        if(this.informe[i].parcial>this.techo){
-            this.techo=this.informe[i].parcial;
-        }
-        if(this.informe[i].parcial<this.piso){
-            this.piso=this.informe[i].parcial;
-        }
 
-    }
     console.log("piso: "+this.piso+"  techo: "+this.techo+" valores: "+this.valores.length);
-    //console.log(this.informe.length);
-    //this.informe=this.informe.sort((a,b)=> a.parcial-b.parcial);
-    // this.piso=this.informe[0].parcial;
-    // this.techo=this.informe[(this.informe.length-1)].parcial;
-    //console.log("piso: "+this.piso+"  techo: "+this.techo);
 
     this.values=[this.piso,this.techo];
     this.data = {
-        labels: ['A','B','C'],
+        labels: this.labels,
         datasets: [
             {
                 data: this.valores,
-                backgroundColor: [
-                    "#42A5F5",
-                    "#66BB6A",
-                    "#FFA726"
-                ],
-                hoverBackgroundColor: [
-                    "#64B5F6",
-                    "#81C784",
-                    "#FFB74D"
-                ]
+                backgroundColor:   this.backgroundColor,
+                borderColor:this.borderColor
             }
         ]
     };
@@ -79,21 +85,32 @@ export class PieChartComponent implements OnInit {
 
   public filtrar(){
 
-    // this.displayData[0].data=  Object.assign([],this.barChartData[0].data);
-    // this.displayChartLabels = Object.assign([], this.barChartLabels)
-    // var seleccionados=[];
-    // var labels=[];
 
-    // for(let d of this.displayData[0].data){
-    //   if(Number(d)>= this.value && Number(d)<=this.maxValue){
+    //this.data["datasets"][0].data=[];//Object.assign(test[0].data,[]);
 
-    //     const indice =this.displayData[0].data.indexOf(d);
-    //     seleccionados.push(d);
-    //     labels.push(this.displayChartLabels[indice]);
+    this.data["datasets"][0].data=this.valores;
+    var seleccionados=[];
+    var labels=[];
 
-    //   }
-    // }
+    for(let d of this.data["datasets"][0].data){
+      if(Number(d)>= this.values[0] && Number(d)<=this.values[1]){
+        const indice =this.data["datasets"][0].data.indexOf(d);
+        seleccionados.push(d);
+        labels.push(this.labels[indice]);
+      }
+    }
 
+    this.data = {
+        labels: labels,
+        datasets: [
+            {
+                data:seleccionados,
+                backgroundColor:  this.backgroundColor,
+                borderColor:this.borderColor
+            }
+        ],
+
+    };
     // this.displayData[0].data= Object.assign([],seleccionados);
     // this.displayChartLabels = Object.assign([], labels)
 
@@ -109,5 +126,57 @@ export class PieChartComponent implements OnInit {
 
   public editar(id:number){
 
+  }
+
+   backgroundColor:any= [
+    'rgba(255, 199, 44, 0.7)',
+    'rgba(0, 76, 175, 0.7)',
+    'rgba(139, 255, 255, 0.7)',
+    'rgba(129, 161, 27, 0.7)',
+    'rgba(255, 173, 255, 0.7)',
+    'rgba(255, 255, 157, 0.7)',
+    'rgba(159, 232, 112, 0.7)',
+    'rgba(237, 69, 24, 0.7)',
+    'rgba(252, 143, 82, 0.7)',
+    'rgba(122, 97, 174, 0.7)',
+    'rgba(0, 121, 255, 0.7)',
+    'rgba(32, 218, 168, 0.7)',
+    'rgba(0, 177, 171, 0.7)',
+    'rgba(255, 77, 119, 0.7)',
+    'rgba(13, 117, 5, 0.7)',
+    'rgba(8, 191, 255, 0.7)',
+    'rgba(255, 107, 134, 0.7)',
+    'rgba(255, 0, 180, 0.7)',
+    'rgb(215, 12, 51, 0.7)',
+  ];
+
+  borderColor:any= [
+    'rgb(255, 199, 44)',
+    'rgb(0, 76, 175)',
+    'rgb(139, 255, 255)',
+    'rgb(129, 161, 27)',
+    'rgb(255, 173, 255)',
+    'rgb(255, 255, 157)',
+    'rgb(159, 232, 112)',
+    'rgb(237, 69, 24)',
+    'rgb(252, 143, 82)',
+    'rgb(122, 97, 174)',
+    'rgb(0, 121, 255)',
+    'rgb(32, 218, 168)',
+    'rgb(0, 177, 171)',
+    'rgb(255, 77, 119)',
+    'rgb(13, 117, 5)',
+    'rgb(8, 191, 255)',
+    'rgb(255, 107, 134)',
+    'rgb(255, 0, 180)',
+    'rgb(215, 12, 51)',
+  ];
+  options:any={
+    plugins: {
+      legend: {
+        display: true,
+        position: "right",
+      },
+    },
   }
 }

@@ -152,6 +152,11 @@ import { TipodocComponent } from './components/Quality/tipodoc/tipodoc.component
 import { TipoeventoComponent } from './components/Quality/tipoevento/tipoevento.component';
 import { InformeVentasComponent } from './components/Quality/informe-ventas/informe-ventas.component';
 import { PieChartComponent } from './components/Quality/pie-chart/pie-chart.component';
+import { MapasComponent } from './components/Quality/mapas/mapas.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+
+
+
 
 @NgModule({
     imports: [
@@ -248,6 +253,7 @@ import { PieChartComponent } from './components/Quality/pie-chart/pie-chart.comp
         VirtualScrollerModule,
         AppCodeModule,
         StyleClassModule,
+        GoogleMapsModule
     ],
     declarations: [
         AppComponent,
@@ -301,7 +307,8 @@ import { PieChartComponent } from './components/Quality/pie-chart/pie-chart.comp
         TipodocComponent,
         TipoeventoComponent,
         InformeVentasComponent,
-        PieChartComponent
+        PieChartComponent,
+        MapasComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

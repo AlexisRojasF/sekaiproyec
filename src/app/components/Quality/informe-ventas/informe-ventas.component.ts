@@ -28,7 +28,7 @@ export class InformeVentasComponent implements OnInit {
   ngOnInit(): void {
     this.rutas = [
         { icon: "pi pi-home",routerLink: ['/admin/uikit/dashboard'] },
-        { label: "Tipos de Evento" },
+        { label: "Informe de ventas" },
       ];
   }
 

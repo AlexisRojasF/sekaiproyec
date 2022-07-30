@@ -37,6 +37,7 @@ import { ComboComponent } from './components/Quality/combo/combo.component';
 import { TipodocComponent } from './components/Quality/tipodoc/tipodoc.component';
 import { TipoeventoComponent } from './components/Quality/tipoevento/tipoevento.component';
 import { InformeVentasComponent } from './components/Quality/informe-ventas/informe-ventas.component';
+import { MapasComponent } from './components/Quality/mapas/mapas.component';
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -74,7 +75,8 @@ import { InformeVentasComponent } from './components/Quality/informe-ventas/info
                     {path:'combos',component:ComboComponent},
                     {path:'tipoDoc',component:TipodocComponent},
                     {path:'tipoEve',component:TipoeventoComponent},
-                    {path:'informes',component: InformeVentasComponent}
+                    {path:'informes',component: InformeVentasComponent},
+                    {path:'mapas',component:MapasComponent}
                 ],
             },
             {path:'pages/landing', component: LandingComponent},

@@ -1,0 +1,24 @@
+<app-breadcrumb [rutas]="rutas"></app-breadcrumb>
+<div>
+    <google-map [center]="center" [zoom]="zoom">
+        <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions; let i=index"
+                [position]="markerPosition"
+                [options]="markerOptions"
+                (mapClick)="openInfoWindow(marker)">
+                <map-info-window>
+                    <h6>Marcardor Evento prueba</h6>
+                    <p>Descripcion del evento de prueba
+                    <br> Latitud= {{markerPosition.lat}}
+                    <br> Longitud= {{markerPosition.lng}}
+                    <br> Notas Ejemplo
+                    </p>
+                </map-info-window>
+            </map-marker>
+
+        <map-polyline  *ngIf="rutaActiva" [options]="polylineOptions"></map-polyline>
+        <map-heatmap-layer *ngIf="mapaDeCalorActivo" [data]="markerPositions" [options]="heatmapOptions"></map-heatmap-layer>
+    </google-map>
+    &nbsp;
+    <button pButton pRipple label="Alternar Mapa de calor" icon="pi pi-plus" class="p-button-success mr-2" (click)="alternarMapaCalor()"></button>
+    <button pButton pRipple label=" Mostrar Ruta" icon="pi pi-plus" class="p-button-success mr-2" (click)="activarRuta()"></button>
+</div>

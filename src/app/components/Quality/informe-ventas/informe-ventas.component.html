@@ -1,7 +1,5 @@
 <app-breadcrumb [rutas]="rutas"></app-breadcrumb>
 
-
-
 <p-card>
     Busqueda
     <hr>
@@ -16,9 +14,10 @@
 
 <p-tabView>
     <p-tabPanel header="Por Producto">
-       <app-pie-chart ></app-pie-chart>
+       <app-pie-chart [selector]="1" ></app-pie-chart>
+    
     </p-tabPanel>
     <p-tabPanel header="Por Vendedor">
-        <!-- <app-pie-chart></app-pie-chart> -->
+         <app-pie-chart [selector]="2"></app-pie-chart>
     </p-tabPanel>
 </p-tabView>

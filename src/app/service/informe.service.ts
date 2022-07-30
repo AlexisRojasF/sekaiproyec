@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Informe } from '../api/informe';
 import { Observable } from 'rxjs/internal/Observable';
+import { InformeVendedor } from '../api/informe-vendedor';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class InformeService {
         this.headers = this.headers.append( 'Content-Type', 'application/json');
     }
 
-    GetSeguimientoPorVendedor(fechaInicial: String, fechaFinal:String ): Observable<Informe[]> {
+    GetInfVentasByProducto(fechaInicial: String, fechaFinal:String ): Observable<Informe[]> {
         const url: string = `${this.url}informes/ventas/prductos/01/001`;
         const body = {
             pedfechaInicio: fechaInicial,
@@ -29,5 +30,16 @@ export class InformeService {
 
         this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
         return this.http.post<Informe[]>(url,body,{'headers': this.headers });
+    }
+
+    GetInfVentasByVendedor(fechaInicial: String, fechaFinal:String ): Observable<InformeVendedor[]> {
+        const url: string = `${this.url}informes/ventas/01/001`;
+        const body = {
+            pedfechaInicio: fechaInicial,
+            pedfechaFinal: fechaFinal
+        }
+
+        this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
+        return this.http.post<InformeVendedor[]>(url,body,{'headers': this.headers });
     }
 }

@@ -1,10 +1,89 @@
 <div class="grid p-fluid">
     <div class="col-5 md:col-5">
+        {{piso}} -> {{techo}}
         <p-slider [(ngModel)]="values" [range]="true" [(min)]="piso" [(max)]="techo" (onChange)="filtrar()"></p-slider>
+        {{values}}
     </div>
 
     <div class="col-12 md:col-6">
-        <p-chart type="pie" [data]="data" [options]="chartOptions"></p-chart>
+        <p-chart type="pie" [data]="data" [options]="options"></p-chart>
+    </div>
+    <div class="col-12 md:col-12">
+
+        <p-table #dt1 [value]="informe" dataKey="procodigo" [rows]="10" [rowHover]="true"
+        styleClass="p-datatable-gridlines" [paginator]="true"
+        [globalFilterFields]="['procodigo','pronombre']" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+                    <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
+                            (click)="clear(dt1)"></button>
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter
+                                (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar.."
+                                class="w-full"/>
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Codigo
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Nombre Producto
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Valor Ventas
+                        </div>
+                    </th>
+
+                    <th>
+                        <div class="flex justify-content-between align-items-center">
+                            Cantidad
+                        </div>
+                    </th>
+
+                    <th style="width: 8rem">
+                        <div class="flex justify-content-between align-items-center">
+                            Unidad
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-inf>
+                <tr [pSelectableRow]="inf" (click)="userSelect(inf)">
+                    <td style="min-width: 4rem;">{{inf.procodigo}}</td>
+                    <td style="min-width: 8rem;">
+                        <span class="image-text ml-2">{{inf.pronombre}}</span>
+                    </td>
+                    <td style="min-width: 4rem;">
+                        <span class="image-text ml-2">{{inf.parcial| currency:'COP':'symbol-narrow':'4.0'}}</span>
+                    </td>
+
+                    <td style="min-width: 4rem;">
+                        <span class="image-text ml-2">{{inf.cantidad}}</span>
+                    </td>
+
+                    <td class="text-center" style="min-width: 4rem;">{{inf.pddunidad}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">No a sido posible cargar la table.</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <tr>
+                    <td colspan="7">Cargando Datos, Espere un momento.</td>
+                </tr>
+            </ng-template>
+        </p-table>
     </div>
 </div>
 

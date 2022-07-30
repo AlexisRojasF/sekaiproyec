@@ -44,6 +44,8 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Tipos Documentos', icon:'pi pi-fw pi-table',routerLink:['/admin/tipoDoc']},
                     {label: 'Tipos Eventos', icon:'pi pi-fw pi-table',routerLink:['/admin/tipoEve']},
                     {label: 'Informes', icon:'pi pi-fw pi-table',routerLink:['/admin/informes']},
+                    {label: 'Seguimiento',icon:'',routerLink:['/admin/mapas']},
+
                     {label: 'Form Layout', icon: 'pi pi-fw pi-id-card', routerLink: ['/admin/admin/uikit/formlayout']},
                     {label: 'Input', icon: 'pi pi-fw pi-check-square', routerLink: ['/admin/uikit/input']},
                     {label: 'Float Label', icon: 'pi pi-fw pi-bookmark', routerLink: ['/admin/uikit/floatlabel']},
