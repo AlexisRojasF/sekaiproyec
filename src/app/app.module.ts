@@ -154,9 +154,16 @@ import { InformeVentasComponent } from './components/Quality/informe-ventas/info
 import { PieChartComponent } from './components/Quality/pie-chart/pie-chart.component';
 import { MapasComponent } from './components/Quality/mapas/mapas.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MetasComponent } from './components/Quality/metas/metas.component';
+import { FestivosComponent } from './components/Quality/festivos/festivos.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
-
-
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
     imports: [
@@ -253,7 +260,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
         VirtualScrollerModule,
         AppCodeModule,
         StyleClassModule,
-        GoogleMapsModule
+        GoogleMapsModule,
+        FullCalendarModule
     ],
     declarations: [
         AppComponent,
@@ -308,7 +316,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
         TipoeventoComponent,
         InformeVentasComponent,
         PieChartComponent,
-        MapasComponent
+        MapasComponent,
+        MetasComponent,
+        FestivosComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

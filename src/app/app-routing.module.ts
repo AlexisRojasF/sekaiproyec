@@ -38,6 +38,8 @@ import { TipodocComponent } from './components/Quality/tipodoc/tipodoc.component
 import { TipoeventoComponent } from './components/Quality/tipoevento/tipoevento.component';
 import { InformeVentasComponent } from './components/Quality/informe-ventas/informe-ventas.component';
 import { MapasComponent } from './components/Quality/mapas/mapas.component';
+import { MetasComponent } from './components/Quality/metas/metas.component';
+import { FestivosComponent } from './components/Quality/festivos/festivos.component';
 @NgModule({
     imports: [
         RouterModule.forRoot([
@@ -76,7 +78,9 @@ import { MapasComponent } from './components/Quality/mapas/mapas.component';
                     {path:'tipoDoc',component:TipodocComponent},
                     {path:'tipoEve',component:TipoeventoComponent},
                     {path:'informes',component: InformeVentasComponent},
-                    {path:'mapas',component:MapasComponent}
+                    {path:'mapas',component:MapasComponent},
+                    {path:'metas',component:MetasComponent},
+                    {path:'festivos',component:FestivosComponent}
                 ],
             },
             {path:'pages/landing', component: LandingComponent},

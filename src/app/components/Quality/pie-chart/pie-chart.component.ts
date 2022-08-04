@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InformeService } from 'src/app/service/informe.service';
 import { Informe } from '../../../api/informe';
-import { Seguimiento } from '../../../api/seguimiento';
+import { InformeVendedor } from '../../../api/informe-vendedor';
 
 @Component({
   selector: 'app-pie-chart',
@@ -9,7 +9,7 @@ import { Seguimiento } from '../../../api/seguimiento';
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnInit {
-    @Input() selector:number;
+    @Input() selector:Number=2;
     values: number[];
     piso:number= Number.POSITIVE_INFINITY;
     techo:number=Number.NEGATIVE_INFINITY;
@@ -17,49 +17,56 @@ export class PieChartComponent implements OnInit {
     datos:any;
     chartOptions:any;
     informe:Informe[]=[];
+    informeVendedores:InformeVendedor[]=[];
     valores:number[]=[];
     labels:String[]=[];
-
     servicio: InformeService;
-
-  fechaIncial:Date=new Date("2011-06-08");
-  fechaFinal:Date=new Date("2022-06-08");
+    @Input() fechaIncial:Date=new Date("2011-06-08");
+    @Input() fechaFinal:Date=new Date("2022-06-08");
 
   constructor(informeVentas:InformeService ) {
     this.servicio= informeVentas;
+    console.log("selector: "+this.selector);
+    console.log(this.fechaIncial.toISOString().split("T")[0]);
+    console.log(this.fechaFinal.toISOString().split("T")[0]);
     if(this.selector==1){
+        //console.log(this.fechaIncial.toISOString().split("T")[0]);
         this.servicio.GetInfVentasByProducto(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
              this.informe=resp;
-            for(let i =0;i<this.informe.length;i++){
-                this.valores.push(this.informe[i].parcial);
-                this.labels.push(this.informe[i].pronombre);
-                if(this.informe[i].parcial>this.techo){
-                    this.techo=this.informe[i].parcial;
+             for(let i =0;i< this.informe.length;i++){
+                this.valores.push( this.informe[i].parcial);
+                this.labels.push( this.informe[i].pronombre);
+                if( this.informe[i].parcial>this.techo){
+                    this.techo= this.informe[i].parcial;
                 }
-                if(this.informe[i].parcial<this.piso){
-                    this.piso=this.informe[i].parcial;
+                if( this.informe[i].parcial<this.piso){
+                    this.piso= this.informe[i].parcial;
                 }
             }
             this.values=[this.piso,this.techo];
             this.valores=this.valores.sort((a,b)=>a-b);
+            console.log(this.valores);
+             console.log("ruta 1");
         });
     }else{
         this.servicio.GetInfVentasByVendedor(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
-            //this.informe=resp;
-           //  console.log("si pase");
-           for(let i =0;i<this.informe.length;i++){
-               this.valores.push(this.informe[i].parcial);
-               this.labels.push(this.informe[i].pronombre);
-               if(this.informe[i].parcial>this.techo){
-                   this.techo=this.informe[i].parcial;
-               }
-               if(this.informe[i].parcial<this.piso){
-                   this.piso=this.informe[i].parcial;
-               }
-           }
-           this.values=[this.piso,this.techo];
-           this.valores=this.valores.sort((a,b)=>a-b);
-           //  console.log(resp);
+            console.log(resp);
+            this.informeVendedores=resp;
+            console.log("ruta 2");
+            console.log(this.informeVendedores.length);
+             for(let i =0;i< this.informeVendedores.length;i++){
+                this.valores.push( this.informeVendedores[i].parcial);
+                this.labels.push( this.informeVendedores[i].sellername);
+                if( this.informeVendedores[i].parcial>this.techo){
+                    this.techo= this.informeVendedores[i].parcial;
+                }
+                if( this.informeVendedores[i].parcial<this.piso){
+                    this.piso= this.informeVendedores[i].parcial;
+                }
+            }
+            this.values=[this.piso,this.techo];
+            this.valores=this.valores.sort((a,b)=>a-b);
+            console.log(this.valores);
        });
     }
 
@@ -115,19 +122,10 @@ export class PieChartComponent implements OnInit {
     // this.displayChartLabels = Object.assign([], labels)
 
   }
-
+  userSelect(){}
   public  agreagar (){
 
   }
-
-  public eliminar(){
-
-  }
-
-  public editar(id:number){
-
-  }
-
    backgroundColor:any= [
     'rgba(255, 199, 44, 0.7)',
     'rgba(0, 76, 175, 0.7)',

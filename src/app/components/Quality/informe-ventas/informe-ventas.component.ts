@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Informe } from 'src/app/api/informe';
 import { InformeService } from '../../../service/informe.service';
@@ -12,17 +12,15 @@ export class InformeVentasComponent implements OnInit {
   rutas: MenuItem[];
   servicio: InformeService;
   informes:Informe[];
-  fechaIncial:Date=new Date("2011-06-08");
-  fechaFinal:Date=new Date("2022-06-08");
+  @Output() porProducto:Number=1;
+  @Output() porVendedor:Number=2;
+  @Output() fechaIncial:Date=new Date("2011-06-08");
+  @Output() fechaFinal:Date=new Date("2022-06-08");
 
   constructor(informeVentas:InformeService ) {
     this.servicio= informeVentas;
-    // this.servicio.GetSeguimientoPorVendedor(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
-    //      this.informes=resp;
-    //      console.log("si pase");
-    //      console.log(resp);
-    // });
-    // console.log(this.fechaIncial.toISOString().split("T")[0]);
+    console.log(this.porProducto);
+    console.log(this.porVendedor);
   }
 
   ngOnInit(): void {
