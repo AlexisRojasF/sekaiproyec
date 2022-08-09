@@ -21,14 +21,25 @@ export class SeguimientoService {
         this.headers = this.headers.append( 'Content-Type', 'application/json');
     }
 
-    GetSeguimientoPorVendedor(fechaInicial: String, fechaFinal:String,vendedor:String ): Observable<Seguimiento[]> {
-        const url: string = `${this.url}Seguimiento/vendedor/${vendedor}`;
+    /**
+     * Consulta el rastreo GPS creado por un vendedor, sea por su seguimiento, pedidos o eventos
+     * @param fechaInicial
+     * @param fechaFinal
+     * @param vendedor vendedor a consultar
+     * @param tipo selecciona el tipo de consulta, si tipo=0 se consultara por el seguimiento GPS del vededor, si tipo=1 los de pedidos y tipo=2 para eventos
+     * @returns Listado de objetos de seguimiento del vendedor en cuestion
+     */
+    GetSeguimientoPorVendedor(fechaInicial: String, fechaFinal:String,vendedor:String, tipo:Number ): Observable<Seguimiento[]> {
+        let seleccion= tipo==0?'vendedor':tipo==1?'pedidos':'eventos';
+        console.log("tipo de busqueda: "+seleccion);
+        const url: string = `${this.url}Seguimiento/${seleccion}/${vendedor}`;
         const body = {
             pedfechaInicio: fechaInicial,
             pedfechaFinal: fechaFinal
         }
-
+        //console.log("consultando"+JSON.stringify(body));
         this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
         return this.http.post<Seguimiento[]>(url,body,{'headers': this.headers });
     }
+
 }

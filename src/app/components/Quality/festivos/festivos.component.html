@@ -1,28 +1,21 @@
 <app-breadcrumb [rutas]="rutas"></app-breadcrumb>
 <p-card>
-    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+    <full-calendar #calendar deepChangeDetection="true" [options]="calendarOptions"></full-calendar>
 </p-card>
 
-<!-- <p-dialog [(visible)]="usuarioDialog" [style]="{width: '800px',height:'1400px'}" header="Crear/Edita Usuario"
+
+<p-dialog [(visible)]="FestivoDialog" [style]="{width: '400px',height:'160px'}" [header]="fechaSeleccionada"
               [modal]="true" styleClass="p-fluid">
 
-        <form [formGroup]="Form" (ngSubmit)="enviar()">
-
-            <div class="card">
+        <form  (ngSubmit)="enviar()">
                 <div class="formgrid grid">
-
-
-                    <div class="col-12 md:col-2 mt-3">
+                    <div class="col-12 md:col-6 mt-3">
                         <button pButton pRipple label="Guardar" type="submit" icon="pi pi-check" class="p-button-outlined p-button-secondary"></button>
                     </div>
 
-                    <div class="col-12 md:col-2 mt-3 ">
-                        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-outlined p-button-secondary"></button>
+                    <div class="col-12 md:col-6 mt-3 ">
+                        <button pButton pRipple label="Cancelar" (click)="cambiar()" type="button" icon="pi pi-times" class="p-button-outlined p-button-secondary"></button>
                     </div>
-
-
                 </div>
-
-            </div>
         </form>
-    </p-dialog> -->
+    </p-dialog>

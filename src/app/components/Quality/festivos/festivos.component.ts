@@ -4,16 +4,21 @@ import { Festivo } from '../../../api/festivo';
 import { FestivoService } from '../../../service/festivo.service';
 import esLocale from '@fullcalendar/core/locales/es';
 import { MenuItem } from 'primeng/api';
+
 @Component({
   selector: 'app-festivos',
   templateUrl: './festivos.component.html',
   styleUrls: ['./festivos.component.scss']
 })
+
 export class FestivosComponent implements OnInit {
     rutas: MenuItem[];
     festivos:Festivo[]=[];
     eventos:any=[];
     festServ:FestivoService;
+    FestivoDialog:boolean=false;
+    fechaSeleccionada:any;
+
 
     calendarOptions: CalendarOptions = {
         locale: esLocale,
@@ -22,7 +27,6 @@ export class FestivosComponent implements OnInit {
     };
     constructor(fest:FestivoService) {
         this.festServ=fest;
-
     }
 
     ngOnInit(): void {
@@ -33,43 +37,56 @@ export class FestivosComponent implements OnInit {
             this.calendarOptions.events=this.eventos;
             console.log(this.calendarOptions.events);
         });
+
         this.rutas = [
             { icon: "pi pi-home",routerLink: ['/admin/uikit/dashboard'] },
-            { label: "Documentos" },
-            { label: "Ventas" },
+            { label: "Festivos" },
           ];
 
     }
 
     handleDateClick(arg) {
-
-        let date= new Date(arg.dateStr).getDay();
-        let evento= { // this object will be "parsed" into an Event Object
-            title: date==6?'Domingo':'Festivo', // a property!
-            start: arg.dateStr, // a property!
-            end: arg.dateStr, // a property! ** see important note below about 'end' **
-            color:"red",
-        }
-        this.eventos.push(evento);
-        console.log(this.eventos.length);
-        this.calendarOptions.events=this.eventos;
-        console.log(this.calendarOptions.events);
-        alert("desea marcar como dia no laboral "+arg.dateStr+" ?");
-
-        //this.calendarOptions.
+        this.cambiar();
+        this.fechaSeleccionada=arg.dateStr;
     }
 
     buildFestivosAsEvents(){
         console.log("construyendo eventos");
         for(let i=0;i<this.festivos.length;i++){
-           let evento= { // this object will be "parsed" into an Event Object
-                title: this.festivos[i].sdfclase.trim()=='f'?'Festivo':'Domingo', // a property!
-                start: this.festivos[i].sdffecha, // a property!
-                end: this.festivos[i].sdffecha, // a property! ** see important note below about 'end' **
-                color:"red",
+           let evento= {
+                title: this.festivos[i].sdfclase.trim()=='f'?'Festivo':'Domingo',
+                start: this.festivos[i].sdffecha,
+                end: this.festivos[i].sdffecha,
+                color:this.festivos[i].sdfclase.trim()=='f'?"red":"blue",
             }
             this.eventos.push(evento);
         }
 
+    }
+
+    enviar(){
+        let date= new Date(this.fechaSeleccionada).getDay();
+        let evento= {
+            title: date==6?'Domingo':'Festivo',
+            start: this.fechaSeleccionada,
+            end: this.fechaSeleccionada,
+            color:date==6?"blue":"red",
+        }
+
+        let festivo:Festivo={
+            sdffecha: this.fechaSeleccionada,
+            sdfclase: date==6?'d':'f',
+        };
+
+        this.festServ.newFestivo(festivo).subscribe(resp=>{
+            this.eventos.push(evento);
+            this.calendarOptions.events=this.eventos;
+            console.log(this.calendarOptions.events);
+            this.cambiar();
+        });
+    }
+
+    cambiar(){
+        this.FestivoDialog=!this.FestivoDialog;
     }
 }

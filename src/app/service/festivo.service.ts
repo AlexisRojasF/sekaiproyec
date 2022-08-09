@@ -24,9 +24,15 @@ export class FestivoService {
         this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
         return this.http.get<Festivo[]>(url,{'headers': this.headers });
     }
-    GetProductosCombo(id:any): Observable<Festivo[]> {
-        const url: string = `${this.url}productos/combos`;
+
+    newFestivo(festivo:Festivo): Observable<Festivo> {
+        const url: string = `${this.url}festivos/`;
         this.headers = this.headers.append('Authorization','Bearer '+ sessionStorage.getItem('token'));
-        return this.http.get<Festivo[]>(url,{'headers': this.headers });
+        const body = {
+            "sdffecha": festivo.sdffecha,
+            "sdfclase": festivo.sdfclase,
+            "sdfnewuser": "ADM",
+        }
+        return this.http.post<Festivo>(url,body,{'headers': this.headers });
     }
 }

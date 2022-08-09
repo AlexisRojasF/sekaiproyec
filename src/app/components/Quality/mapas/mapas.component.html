@@ -1,5 +1,46 @@
 <app-breadcrumb [rutas]="rutas"></app-breadcrumb>
-<div>
+<p-card>
+    <h4>Busqueda</h4>
+    <hr>
+    <div class="grid">
+        <div class="col-12 md:col-4 mt-3">
+            Consulta
+            <p-dropdown [options]="consultas" [(ngModel)]="consulta"></p-dropdown>
+        </div>
+        <div class="col-12 md:col-4 mt-3">
+            Vendedor
+            <p-dropdown [options]="vendedores" [(ngModel)]="vendedorSeleccionado" optionLabel="vencodigo"></p-dropdown>
+        </div>
+        <div class="col-12 md:col-4 mt-3">
+            Animacion
+            <p-dropdown [options]="animaciones" [(ngModel)]="animacion"></p-dropdown>
+        </div>
+        <div class="col-12 md:col-4 mt-3">
+            Fecha
+            <p-calendar [(ngModel)]="fechaIncial"></p-calendar>
+        </div>
+        <div class="col-12 md:col-4 mt-3">
+            Desde
+            <p-dropdown [options]="horas" [(ngModel)]="horaInicial"></p-dropdown>
+        </div>
+        <div class="col-12 md:col-4 mt-3">
+            Hasta
+            <p-dropdown [options]="horas" [(ngModel)]="horaFinal"></p-dropdown>
+        </div>
+        <div class="col-12 md:col-4 mt-3">
+            Ruta
+            <p-dropdown [options]="tiposRuta" [(ngModel)]="tipoRuta"></p-dropdown>
+        </div>
+        <div class="col-12 md:col-4 mt-3">
+
+            <button pButton label="Buscar" class="p-button-outlined mb-2" icon="pi pi-search" (click)="buscar()"></button>
+        </div>
+    </div>
+</p-card>
+
+&nbsp;
+
+<div class="mapa">
     <google-map [center]="center" [zoom]="zoom">
         <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions; let i=index"
                 [position]="markerPosition"

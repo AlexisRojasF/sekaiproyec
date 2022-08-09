@@ -21,7 +21,7 @@ export class InformeService {
         this.headers = this.headers.append( 'Content-Type', 'application/json');
     }
 
-    GetInfVentasByProducto(fechaInicial: String, fechaFinal:String ): Observable<Informe[]> {
+    GetInfVentasByProducto(fechaInicial: String, fechaFinal:String,vendedor?:String,catalogo?:String ): Observable<Informe[]> {
         const url: string = `${this.url}informes/ventas/prductos/01/001`;
         const body = {
             pedfechaInicio: fechaInicial,
@@ -32,7 +32,7 @@ export class InformeService {
         return this.http.post<Informe[]>(url,body,{'headers': this.headers });
     }
 
-    GetInfVentasByVendedor(fechaInicial: String, fechaFinal:String ): Observable<InformeVendedor[]> {
+    GetInfVentasByVendedor(fechaInicial: String, fechaFinal:String, vendedor?:String,catalogo?:String): Observable<InformeVendedor[]> {
         const url: string = `${this.url}informes/ventas/01/001`;
         const body = {
             pedfechaInicio: fechaInicial,
