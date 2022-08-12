@@ -12,6 +12,9 @@ import { VentasService } from '../../../service/ventas.service';
   templateUrl: './mapas.component.html',
   styleUrls: ['./mapas.component.scss']
 })
+/**
+ * Controlador para el componente de mapa, es el encargado de conectar con la API de google maps para la
+ */
 export class MapasComponent implements OnInit {
   rutas: MenuItem[];
   marcadores: Marcador[]=[];

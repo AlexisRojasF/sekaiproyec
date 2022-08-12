@@ -26,7 +26,7 @@
     </div>
 </div><!--card-->
 
-<p-table #dt18 [value]="ventas" dataKey="pddnumero" [rows]="10" selectionMode="single" [(selection)]="ventaSeleccionada" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+<p-table #dt18 [value]="ventas" dataKey="pddnumero" [rows]="10" selectionMode="single" [(selection)]="ventaSeleccionada" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['pddnumero','pedvincula','representative.name','status']" responsiveLayout="scroll">
     <ng-template pTemplate="caption">
         <div class="col">
             <div class="justify-content-between  lg:flex-row">
@@ -182,51 +182,49 @@
     </ng-template>
     <ng-template pTemplate="body" let-venta>
         <tr>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 {{venta.pddtipo}}
             </td>
-            <td style="min-width: 12rem;">
-
-                <span class="image-text ml-2">{{venta.pddnumero}}</span>
+            <td style="min-width: 4rem;">
+                {{venta.pddnumero}}
             </td>
-            <td style="min-width: 14rem;">
-
-                <span class="image-text ml-2">{{venta.pedvende.trim()}}</span>
+            <td style="min-width: 4rem;">
+                {{venta.pedvende.trim()}}
             </td>
-            <td style="min-width: 10rem;">
+            <td style="min-width: 4rem;">
                 {{venta.pedvincula.trim()}}
             </td>
             <td style="min-width: 10rem;">
                 {{venta.vinnombre }}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 <span [class]="'venta-badge status-' + venta.status">{{venta.pedfecha | date: 'dd/MM/yyyy'}}</span>
             </td>
-            <td style="min-width: 12rem; ">
+            <td style="min-width: 4rem; ">
                 {{venta.pedplazo}}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 {{venta.pddnumero}}
             </td>
-            <td class="text-center" style="min-width: 8rem;">
+            <td class="text-center" style="min-width: 4rem;">
                 {{venta.total}}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 {{venta.pedactivo}}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 {{venta.pedlong}}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 {{venta.pedlati}}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 {{venta.vindirecci}}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 {{venta.vindirecci}}
             </td>
-            <td style="min-width: 12rem;">
+            <td style="min-width: 4rem;">
                 NO
             </td>
 

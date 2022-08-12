@@ -8,26 +8,32 @@ import { InformeService } from '../../../service/informe.service';
   templateUrl: './informe-ventas.component.html',
   styleUrls: ['./informe-ventas.component.scss']
 })
+/**
+ * Se encarga de mostrar los informes de ventas por producto y vendedor
+ */
 export class InformeVentasComponent implements OnInit {
   rutas: MenuItem[];
   servicio: InformeService;
   informes:Informe[];
-  @Output() porProducto:Number=1;
-  @Output() porVendedor:Number=2;
+  porProducto:Number=0;
+  porVendedor:Number=1;
   @Output() fechaIncial:Date=new Date("2011-06-08");
   @Output() fechaFinal:Date=new Date("2022-06-08");
 
   constructor(informeVentas:InformeService ) {
     this.servicio= informeVentas;
-    console.log(this.porProducto);
-    console.log(this.porVendedor);
   }
 
   ngOnInit(): void {
+
     this.rutas = [
         { icon: "pi pi-home",routerLink: ['/admin/uikit/dashboard'] },
         { label: "Informe de ventas" },
       ];
+  }
+  cambio(){
+    console.log("se supone que cambia");
+    sessionStorage.setItem("selector",this.porProducto.toString());
   }
 
 }

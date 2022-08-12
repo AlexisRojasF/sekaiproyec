@@ -1,3 +1,6 @@
+/**
+ * encapsula la informacion del detalle de ventas
+ */
 export interface DetalleVentas {
     pddempresa:    string;
     pddclase:      string;

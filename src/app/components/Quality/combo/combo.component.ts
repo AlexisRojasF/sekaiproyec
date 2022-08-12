@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './combo.component.html',
   styleUrls: ['./combo.component.scss']
 })
+
+/**
+ * se encarga del control de los diversos combos
+ */
 export class ComboComponent implements OnInit {
     selectedCombo: Combo;
     combos: Combo[]=[];
@@ -35,6 +39,9 @@ export class ComboComponent implements OnInit {
     this.selectedCombo=combo;
   }
 
+  /**
+   * Se encarga de la redireccion a la vista de productos de un combo
+   */
   productosCombo(){
     sessionStorage.setItem('combo',JSON.stringify(this.selectedCombo));
     this.router.navigate(['/admin/productos'])

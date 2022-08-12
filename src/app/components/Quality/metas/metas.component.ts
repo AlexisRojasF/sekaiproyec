@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './metas.component.html',
   styleUrls: ['./metas.component.scss']
 })
+/**
+ * Encargado del control de datos de las metas
+ */
 export class MetasComponent implements OnInit {
     fechaIncial:Date=new Date("2011-06-08");
     fechaFinal:Date=new Date("2022-06-08");

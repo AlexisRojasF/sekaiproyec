@@ -9,7 +9,8 @@ import { InformeVendedor } from '../../../api/informe-vendedor';
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnInit {
-    @Input() selector:Number=2;
+    @Input() selector:Number;
+    seleccionarConsulta=sessionStorage.getItem("selector")
     values: number[];
     piso:number= Number.POSITIVE_INFINITY;
     techo:number=Number.NEGATIVE_INFINITY;
@@ -26,10 +27,12 @@ export class PieChartComponent implements OnInit {
 
   constructor(informeVentas:InformeService ) {
     this.servicio= informeVentas;
+    this.selector=Number(this.seleccionarConsulta);
+    console.log("consulta seleccionada: "+this.seleccionarConsulta);
     console.log("selector: "+this.selector);
     console.log(this.fechaIncial.toISOString().split("T")[0]);
     console.log(this.fechaFinal.toISOString().split("T")[0]);
-    if(this.selector==1){
+    if(this.selector==0){
         //console.log(this.fechaIncial.toISOString().split("T")[0]);
         this.servicio.GetInfVentasByProducto(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
              this.informe=resp;
@@ -43,17 +46,19 @@ export class PieChartComponent implements OnInit {
                     this.piso= this.informe[i].parcial;
                 }
             }
+
             this.values=[this.piso,this.techo];
             this.valores=this.valores.sort((a,b)=>a-b);
             console.log(this.valores);
-             console.log("ruta 1");
+            console.log("ruta 1");
+
         });
     }else{
         this.servicio.GetInfVentasByVendedor(this.fechaIncial.toISOString().split("T")[0],this.fechaFinal.toISOString().split("T")[0]).subscribe(resp=>{
-            console.log(resp);
-            this.informeVendedores=resp;
+            let infor:InformeVendedor=resp;
+            this.informeVendedores.push(infor);
             console.log("ruta 2");
-            console.log(this.informeVendedores.length);
+            console.log(this.informeVendedores+"LARGO "+ this.informeVendedores.length);
              for(let i =0;i< this.informeVendedores.length;i++){
                 this.valores.push( this.informeVendedores[i].parcial);
                 this.labels.push( this.informeVendedores[i].sellername);
@@ -90,9 +95,10 @@ export class PieChartComponent implements OnInit {
 
   }
 
-  public filtrar(){
-
-
+  /**
+   * se encarga de tomar los datos de 
+   */
+  filtrar(){
     //this.data["datasets"][0].data=[];//Object.assign(test[0].data,[]);
 
     this.data["datasets"][0].data=this.valores;
@@ -123,7 +129,7 @@ export class PieChartComponent implements OnInit {
 
   }
   userSelect(){}
-  public  agreagar (){
+  agreagar (){
 
   }
    backgroundColor:any= [
@@ -169,6 +175,7 @@ export class PieChartComponent implements OnInit {
     'rgb(255, 0, 180)',
     'rgb(215, 12, 51)',
   ];
+
   options:any={
     plugins: {
       legend: {

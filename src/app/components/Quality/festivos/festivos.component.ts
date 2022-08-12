@@ -44,12 +44,18 @@ export class FestivosComponent implements OnInit {
           ];
 
     }
-
+    /**
+     * Maneja el click en un dia del calendario
+     * @param arg referencia al dia que fue cliqueado
+     */
     handleDateClick(arg) {
         this.cambiar();
         this.fechaSeleccionada=arg.dateStr;
     }
 
+    /**
+     * Lee la lista de festivos recibida del backend procesandola para cargarlos en el calendario como domingo o festivos
+     */
     buildFestivosAsEvents(){
         console.log("construyendo eventos");
         for(let i=0;i<this.festivos.length;i++){
@@ -63,7 +69,9 @@ export class FestivosComponent implements OnInit {
         }
 
     }
-
+    /**
+     * Metodo encargado de llamar al servicio de registro de nuevos festivos,
+     */
     enviar(){
         let date= new Date(this.fechaSeleccionada).getDay();
         let evento= {
@@ -85,7 +93,9 @@ export class FestivosComponent implements OnInit {
             this.cambiar();
         });
     }
-
+    /**
+     * controla si se despliega propt de confirmacion de creacion de un festivo
+     */
     cambiar(){
         this.FestivoDialog=!this.FestivoDialog;
     }

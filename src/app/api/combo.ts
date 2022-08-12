@@ -1,3 +1,6 @@
+/**
+ * Representa la informacion de combos de la aplicacion 
+ */
 export interface Combo {
     produtos:   number;
     procodigo:  string;

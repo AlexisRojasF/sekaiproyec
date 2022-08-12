@@ -12,7 +12,7 @@
 
 &nbsp;
 
-<p-tabView>
+<p-tabView (onChange)="cambio()" [activeIndex]="porProducto">
     <p-tabPanel header="Por Producto">
        <app-pie-chart [selector]="porProducto" [fechaIncial]="fechaIncial" [fechaFinal]="fechaFinal"></app-pie-chart>
 

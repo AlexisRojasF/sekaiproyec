@@ -8,6 +8,7 @@ import { Catalogo } from 'src/app/api/catalogo';
   templateUrl: './catalogos-ventas.component.html',
   styleUrls: ['./catalogos-ventas.component.scss']
 })
+
 export class CatalogosVentasComponent implements OnInit {
     catalogos:Catalogo[]=[];
     catalogoSeleccionado: Catalogo;

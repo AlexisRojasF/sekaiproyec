@@ -6,6 +6,10 @@ import { MenuItem } from 'primeng/api';
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
+
+/**
+ * Componente para agregar el acceso rapido al menu de migas de pan 
+ */
 export class BreadcrumbComponent implements OnInit {
   @Input() rutas:MenuItem[];
   constructor() { }
